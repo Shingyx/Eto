@@ -28,7 +28,7 @@ namespace Eto.Test.Sections.Controls
 					new StackLayout
 					{
 						Orientation = Orientation.Horizontal,
-						Items = { null, AddTab(), RemoveTab(), ClearTabs(), SelectTab(), TabPositionControl(), null }
+						Items = { null, AddTab(), RemoveTab(), ClearTabs(), SelectTab(), ToggleVisible(), TabPositionControl(), null }
 					},
 					new StackLayoutItem(tabControl, expand: true)
 				}
@@ -84,6 +84,19 @@ namespace Eto.Test.Sections.Controls
 				if (tabControl.Pages.Count > 0)
 				{
 					tabControl.SelectedIndex = rnd.Next(tabControl.Pages.Count);
+				}
+			};
+			return control;
+		}
+
+		Control ToggleVisible()
+		{
+			var control = new Button { Text = "Toggle Visible" };
+			control.Click += (s, e) =>
+			{
+				if (tabControl.SelectedIndex >= 0 && tabControl.Pages.Count > 0)
+				{
+					tabControl.SelectedPage.Visible = !tabControl.SelectedPage.Visible;
 				}
 			};
 			return control;
